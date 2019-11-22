@@ -5,12 +5,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --base-href ./",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:electron": "ng build --base-href ./ && electron .",
-    "watch": "ng build --base-href ./ && nodemon --exec 'electron .'"
+    "start:electron": "npm run build && electron .",
+    "watch": "npm run build && nodemon --exec 'electron .'"
   },
   "private": true,
   "dependencies": {
@@ -33,7 +33,6 @@
     "@angular/language-service": "~8.2.14",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
