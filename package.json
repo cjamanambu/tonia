@@ -1,7 +1,7 @@
 {
   "name": "tonia",
   "version": "0.0.0",
-  "main": "main.js",
+  "main": "electron/dist/main.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start:electron": "npm run build && electron .",
+    "electron": "npm run build && tsc --p electron && electron .",
     "watch": "npm run build && nodemon --exec 'electron .'"
   },
   "private": true,
@@ -31,6 +31,7 @@
     "@angular/cli": "~8.3.19",
     "@angular/compiler-cli": "~8.2.14",
     "@angular/language-service": "~8.2.14",
+    "@types/electron": "^1.6.10",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "codelyzer": "^5.0.0",
