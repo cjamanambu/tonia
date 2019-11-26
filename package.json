@@ -1,7 +1,7 @@
 {
   "name": "tonia",
   "version": "0.0.0",
-  "main": "electron/dist/main.js",
+  "main": "electron/dist/App.js",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
