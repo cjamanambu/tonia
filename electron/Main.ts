@@ -28,6 +28,7 @@ export default class Main {
         Main.connection = await createConnection();
         Main.mainWindow = new Main.BrowserWindow({
             width: 800, height: 600,
+            fullscreen: true,
             show: false,
             webPreferences: {
                 nodeIntegration: true
