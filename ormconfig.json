@@ -1,6 +1,6 @@
 {
   "type": "sqlite",
-  "database": "electron/db/tonia.sqlite",
+  "database": "electron/src/db/tonia.sqlite",
   "synchronize": true,
   "logging": true,
   "entities": [
