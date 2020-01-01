@@ -1,12 +1,13 @@
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { createConnection, Connection, getConnectionOptions } from 'typeorm';
+import { AddressInfo } from 'net';
 
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
-import './controllers/v1/users.controller';
+import './controllers/v1/home.controller';
 
 export default class App {
 
@@ -24,7 +25,7 @@ export default class App {
   }
 
   private initializeBindings(): void {
-
+    
   }
 
   private async initializeInfrastructure(): Promise<void> {
@@ -43,7 +44,10 @@ export default class App {
   }
 
   public listen(): void {
-    const serve = this.app.listen(process.env.PORT || 5000, () => `App is running on ${serve.address().PORT}`);
+    const server = this.app.listen(5000, () => {
+      const { port } = server.address() as AddressInfo;
+      console.log('App is listening at %s', port);
+    });
   }
 
   public async closeDBConnection(): Promise<void> {

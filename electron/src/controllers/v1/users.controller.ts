@@ -7,5 +7,4 @@ export class UserController extends BaseHttpController {
   constructor() {
     super();
   }
-
 }
