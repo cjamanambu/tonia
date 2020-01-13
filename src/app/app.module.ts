@@ -1,6 +1,9 @@
+// @angular
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // app
 import { AppComponent } from './app.component';
@@ -12,6 +15,7 @@ import { AngularMaterialModule } from './core/angular-material.module';
 // modules
 import { AuthModule } from './modules/auth/auth.module';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -21,9 +25,13 @@ import { AuthModule } from './modules/auth/auth.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
     AuthModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
