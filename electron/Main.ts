@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron';
-import { createConnection, Connection } from 'typeorm';
+import { server } from './src/server';
 import * as url from 'url';
 import * as path from 'path';
 
@@ -7,7 +7,6 @@ export default class Main {
     static mainWindow: Electron.BrowserWindow;
     static application: Electron.App;
     static BrowserWindow;
-    static connection: Connection;
 
     private static onWindowAllClosed() {
         if (process.platform !== 'darwin') {
@@ -17,7 +16,7 @@ export default class Main {
 
     private static async onClosed() {
         Main.mainWindow = null;
-        await Main.connection.close();
+        await server.closeDBConnection();
     }
 
     private static onReadyToShow() {
@@ -25,7 +24,7 @@ export default class Main {
     }
 
     private static async onReady() {
-        Main.connection = await createConnection();
+        server.listen();
         Main.mainWindow = new Main.BrowserWindow({
             width: 800, height: 600,
             fullscreen: true,
