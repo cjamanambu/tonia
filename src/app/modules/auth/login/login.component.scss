@@ -1,0 +1,57 @@
+#login {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    padding: 60px;
+
+    .bg-content {
+
+      .logo {
+        width: 50%;
+        height: 10%;
+      }
+    }
+  }
+
+  .login-form {
+    background: rgb(255, 255, 255);
+    width: 100%;
+    height: 100%;
+    
+    .form-content {
+      position: relative;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      min-height: 100%;
+      padding: 60px;
+      align-items: center;
+    }
+
+    .form {
+      max-width: 400px;
+      text-align: left;
+      display: inline-block;
+      width: 100%;
+      transition: all 0.4s ease;
+
+      .form-field {
+        width: 100%;
+        padding: 0px 20px;
+
+        input {
+          margin: 0;
+        }
+      }
+
+      .button {
+        padding: 0px 20px;
+      }
+    }
+  }
+}
+

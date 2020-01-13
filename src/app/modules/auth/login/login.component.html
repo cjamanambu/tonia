@@ -1,22 +1,26 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
 
-  <mat-card class="box">
-    <mat-card-header>
-      <mat-card-title>Log in</mat-card-title>
-    </mat-card-header>
+<div id="login" fxLayout="row">
+  <div class="bg" fxFlex="28">
+    <div class="bg-content">
+      
+    </div>
+  </div>
 
-    <form class="example-form">
-      <mat-card-content>
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Username">
+  <div class="login-form" fxFlex>
+    <div class="form-content">
+      <form class="form">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Enter your username</mat-label>
+          <input matInput placeholder="Username"/>
         </mat-form-field>
-
-        <mat-form-field class="example-full-width">
-          <input matInput placeholder="Password">
+        <mat-form-field class="form-field" appearance="outline">
+          <mat-label>Enter your password</mat-label>
+          <input matInput placeholder="Password"/>
         </mat-form-field>
-      </mat-card-content>
-      <button mat-stroked-button color="accent" class="btn-block">Log in</button>
-    </form>
-  </mat-card>
-
+        <div class="button">
+          <button mat-stroked-button color="primary">Login</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
