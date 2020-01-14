@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "dev": "npm run build && npm start",
     "electron": "npm run build && tsc --p electron && electron .",
-    "watch": "npm run build && nodemon --exec 'electron .'"
+    "watch": "npm run build && tsc --p electron && nodemon --exec 'electron .'"
   },
   "private": true,
   "dependencies": {

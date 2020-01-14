@@ -9,10 +9,22 @@
     padding: 60px;
 
     .bg-content {
+      color: white;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 10px;
 
-      .logo {
-        width: 50%;
-        height: 10%;
+      h3 {
+        font-family: 'Varela Round', sans-serif;
+        display: inline-block;
+        font-size: 23px;
+        margin-top: 180px;
+        width: 100%;
+      }
+
+      p {
+        font-family: 'Open Sans', sans-serif;
       }
     }
   }
@@ -38,6 +50,11 @@
       display: inline-block;
       width: 100%;
       transition: all 0.4s ease;
+
+      .logo {
+        width: 30%;
+        height: 40%;
+      }
 
       .form-field {
         width: 100%;
