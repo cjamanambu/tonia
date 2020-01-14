@@ -14,11 +14,12 @@ import { AngularMaterialModule } from './core/angular-material.module';
 
 // modules
 import { AuthModule } from './modules/auth/auth.module';
+import { HomeModule } from './modules/home/home.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +29,8 @@ import { AuthModule } from './modules/auth/auth.module';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModule
+    AuthModule,
+    HomeModule
   ],
   providers: [],
   bootstrap: [AppComponent],

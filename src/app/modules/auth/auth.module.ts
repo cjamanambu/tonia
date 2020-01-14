@@ -16,6 +16,8 @@ import {
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+import { AppRoutingModule } from '../../core/app-routing.module';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -29,7 +31,8 @@ import { RegisterComponent } from './register/register.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule
   ],
   exports: [
     LoginComponent,
