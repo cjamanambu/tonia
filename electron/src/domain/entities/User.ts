@@ -1,8 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
+import { Login } from './Login';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn()
+
+  @PrimaryGeneratedColumn('uuid')
   id: number;
 
   @Column()
@@ -10,4 +12,7 @@ export class User {
 
   @Column()
   lastName: string;
+
+  @OneToOne(type => Login, login => login.user)
+  login: Login;
 }
