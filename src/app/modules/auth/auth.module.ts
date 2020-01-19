@@ -1,22 +1,23 @@
 // @angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FlexLayoutModule } from '@angular/flex-layout';
-
-// material
-import {
-  MatCardModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatButtonModule
-} from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 // components
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+// routers
 import { AppRoutingModule } from '../../core/app-routing.module';
+
+// @nebular
+import { NbAuthModule } from '@nebular/auth';
+import {
+  NbAlertModule,
+  NbButtonModule,
+  NbCheckboxModule,
+  NbInputModule
+} from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -25,14 +26,13 @@ import { AppRoutingModule } from '../../core/app-routing.module';
   ],
   imports: [
     CommonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NbAlertModule,
+    NbButtonModule,
+    NbCheckboxModule,
+    NbInputModule,
+    NbAuthModule
   ],
   exports: [
     LoginComponent,

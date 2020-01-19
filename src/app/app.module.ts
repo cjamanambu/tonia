@@ -1,5 +1,6 @@
 // @angular
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -16,6 +17,11 @@ import { AngularMaterialModule } from './core/angular-material.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HomeModule } from './modules/home/home.module';
 
+// @nebular
+import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +36,19 @@ import { HomeModule } from './modules/home/home.module';
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
-    HomeModule
+    HttpClientModule,
+    HomeModule,
+    NbThemeModule.forRoot({ name: 'default' }),
+    NbLayoutModule,
+    NbEvaIconsModule,
+    NbAuthModule.forRoot({
+      strategies: [
+        NbPasswordAuthStrategy.setup({
+          name: 'email',
+        }),
+      ],
+      forms: {},
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
