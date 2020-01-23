@@ -7,7 +7,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
-import './controllers/v1/home.controller';
+import './controller/v1/home.controller';
 
 export default class App {
 
@@ -18,7 +18,7 @@ export default class App {
 
   constructor() {
     this.container = new Container();
-    this.server = new InversifyExpressServer(this.container);
+    this.server = new InversifyExpressServer(this.container, null, { rootPath: '/api/v1'});
     this.initializeInfrastructure();
     this.initializeMiddlewares();
     this.app = this.server.build();

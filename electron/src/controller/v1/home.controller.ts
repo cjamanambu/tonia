@@ -3,7 +3,11 @@ import { controller, httpGet, BaseHttpController, request, response } from 'inve
 import { inject } from 'inversify';
 
 @controller('/')
-export class HomeController {
+export class HomeController extends BaseHttpController {
+
+  constructor() {
+    super();
+  }
 
   @httpGet('/')
   public get(@response() res: express.Response) {
