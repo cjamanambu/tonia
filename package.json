@@ -10,8 +10,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "dev": "npm run build && npm start",
-    "electron": "npm run build && tsc --p electron && electron .",
-    "watch": "npm run build && tsc --p electron && nodemon --exec 'electron .'"
+    "electron": "npm run build && tsc --p electron && electron . --no-sandbox",
+    "watch": "npm run build && tsc --p electron && nodemon --exec 'electron . --no-sandbox'"
   },
   "private": true,
   "dependencies": {

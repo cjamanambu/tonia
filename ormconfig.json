@@ -4,9 +4,9 @@
   "synchronize": true,
   "logging": true,
   "entities": [
-    "electron/dist/app/domain/entities/**/*.js"
+    "electron/dist/src/domain/entities/**/*.js"
   ],
   "cli": {
-    "entitiesDir": "electron/dist/app/domain/entities"
+    "entitiesDir": "electron/dist/src/domain/entities"
   } 
 }

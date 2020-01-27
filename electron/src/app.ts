@@ -8,6 +8,8 @@ import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
 import './controller/v1/home.controller';
+import './controller/v1/users.controller';
+
 
 export default class App {
 
