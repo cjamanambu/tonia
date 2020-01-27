@@ -1,27 +1,25 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { IUser } from './user.interface';
 
 @Entity()
-export class User {
+export class UserEntity implements IUser {
 
   @PrimaryGeneratedColumn('uuid')
-  id: number;
+  id: string;
 
   @Column()
-  firstName: string;
+  firstname: string;
 
   @Column()
-  lastName: string;
-
-  @Column()
-  email: string;
+  lastname: string;
 
   @Column()
   phone: string;
 
   @Column()
-  username: string;
+  email: string;
 
   @Column()
-  passwordHash: string;
+  address: string;
 
 }

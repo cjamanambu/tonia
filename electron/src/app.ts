@@ -9,6 +9,10 @@ import * as cors from 'cors';
 
 import './controller/v1/home.controller';
 import './controller/v1/users.controller';
+import { UserService } from './domain/entities/user/user.service';
+import { TYPES } from './application/constant/types';
+import { UserMapper } from './application/mapper/user.mapper';
+import { UserUsecase } from './application/usecase/user.usecase';
 
 
 export default class App {
@@ -20,6 +24,7 @@ export default class App {
 
   constructor() {
     this.container = new Container();
+    this.initializeBindings();
     this.server = new InversifyExpressServer(this.container, null, { rootPath: '/api/v1'});
     this.initializeInfrastructure();
     this.initializeMiddlewares();
@@ -27,7 +32,9 @@ export default class App {
   }
 
   private initializeBindings(): void {
-    
+    this.container.bind<UserService>(TYPES.UserService).to(UserService);
+    this.container.bind<UserMapper>(TYPES.UserMapper).to(UserMapper);
+    this.container.bind<UserUsecase>(TYPES.UserUsecase).to(UserUsecase);
   }
 
   private async initializeInfrastructure(): Promise<void> {
