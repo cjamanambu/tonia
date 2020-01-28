@@ -1,26 +1,40 @@
 import { UserInput } from './user.input';
 import { IUser } from './user.interface';
 import { getRepository } from 'typeorm';
-import { UserEntity } from './user.entity';
+import { User } from './user.entity';
 import { injectable } from 'inversify';
 
 @injectable()
 export class UserService {
 
-  public async create(user: UserInput): Promise<IUser> {
-    console.log('user service');
-    return getRepository(UserEntity).save({
+  constructor() {}
+
+  public async createAndSave(user: UserInput): Promise<IUser> {
+    return await getRepository(User).save({
       firstname: user.firstname,
       lastname: user.lastname,
       email: user.email,
       phone: user.phone,
-      address: user.address
+      address: user.address,
+      type: user.type,
+      isRegistered: false,
+      loginID: null
     });
   }
 
-  public async get(id: string): Promise<IUser> {
-    return getRepository(UserEntity).findOneOrFail({
-      where: {id}
+  public async findByName(firstname: string, lastname: string): Promise<IUser> {
+    return await getRepository(User).findOne({
+      where: { firstname, lastname }
     });
+  }
+
+  public async findByID(id: string): Promise<IUser> {
+    return getRepository(User).findOne({
+      where: { id }
+    });
+  }
+
+  public registerUser(id: string, loginID: string) {
+    return getRepository(User).update(id, { isRegistered: true, loginID });
   }
 }

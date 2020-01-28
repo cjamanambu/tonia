@@ -13,6 +13,7 @@ import { UserService } from './domain/entities/user/user.service';
 import { TYPES } from './application/constant/types';
 import { UserMapper } from './application/mapper/user.mapper';
 import { UserUsecase } from './application/usecase/user.usecase';
+import { LoginService } from './domain/entities/login/login.service';
 
 
 export default class App {
@@ -32,9 +33,13 @@ export default class App {
   }
 
   private initializeBindings(): void {
+    // user
     this.container.bind<UserService>(TYPES.UserService).to(UserService);
     this.container.bind<UserMapper>(TYPES.UserMapper).to(UserMapper);
     this.container.bind<UserUsecase>(TYPES.UserUsecase).to(UserUsecase);
+
+    // login
+    this.container.bind<LoginService>(TYPES.LoginService).to(LoginService);
   }
 
   private async initializeInfrastructure(): Promise<void> {

@@ -5,6 +5,7 @@ export const TYPES = {
 
   // services
   UserService: Symbol.for('UserService'),
+  LoginService: Symbol.for('LoginSerice'),
 
   // mappers
   UserMapper: Symbol.for('UserMapper'),

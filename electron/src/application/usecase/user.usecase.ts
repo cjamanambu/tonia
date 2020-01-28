@@ -15,14 +15,8 @@ export class UserUsecase {
   ) {}
 
   public async createUser(req: express.Request): Promise<IUser> {
-    // const user = this.userMapper.fromReqBodyToUserInput(req);
-    return this.userService.create({
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      phone: req.body.phone,
-      email: req.body.email,
-      address: req.body.address
-    });
+    const newUser = this.userMapper.fromReqBodyToUserInput(req);
+    return this.userService.createAndSave(newUser);
   }
 
 }

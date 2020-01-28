@@ -1,8 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne } from 'typeorm';
 import { IUser } from './user.interface';
 
 @Entity()
-export class UserEntity implements IUser {
+export class User implements IUser {
 
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -21,5 +21,14 @@ export class UserEntity implements IUser {
 
   @Column()
   address: string;
+
+  @Column()
+  type: string;
+
+  @Column()
+  isRegistered: boolean;
+
+  @Column({nullable: true})
+  loginID: string;
 
 }
