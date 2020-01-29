@@ -5,7 +5,7 @@ import { injectable } from 'inversify';
 @injectable()
 export class UserMapper {
 
-  public fromReqBodyToUserInput(req: express.Request) {
+  public fromRequestToUser(req: express.Request): UserInput {
     return new UserInput(
       req.body.firstname,
       req.body.lastname,

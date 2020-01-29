@@ -14,8 +14,8 @@ export class UserUsecase {
     @inject(TYPES.UserMapper) private userMapper: UserMapper
   ) {}
 
-  public async createUser(req: express.Request): Promise<IUser> {
-    const newUser = this.userMapper.fromReqBodyToUserInput(req);
+  public async createUser(request: express.Request): Promise<IUser> {
+    const newUser = this.userMapper.fromRequestToUser(request);
     return this.userService.createAndSave(newUser);
   }
 

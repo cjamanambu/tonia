@@ -9,5 +9,10 @@ export const TYPES = {
 
   // mappers
   UserMapper: Symbol.for('UserMapper'),
+  AuthMapper: Symbol.for('AuthMapper'),
+
+  // middlewares
+  CheckDuplicateUsernameMiddleware: Symbol.for('CheckDuplicateUsernameMiddleware'),
+  CheckUserExistsMiddleware: Symbol.for('CheckUserExistsMiddleware'),
 
 };

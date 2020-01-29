@@ -8,6 +8,7 @@ import { UserUsecase } from '../../application/usecase/user.usecase';
 
 @controller('/users')
 export class UserController extends BaseHttpController {
+
   constructor(
     @inject(TYPES.UserUsecase) private userUsecase: UserUsecase
   ) {

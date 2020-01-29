@@ -6,6 +6,6 @@ export interface IUser {
   email: string;
   address: string;
   type: string;
-  isRegistered: boolean;
+  isRegistered: boolean; // @TODO might not be necessary since we can just check if login ID is null
   loginID: string;
 }
