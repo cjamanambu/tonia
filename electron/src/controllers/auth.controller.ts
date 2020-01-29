@@ -7,7 +7,7 @@ import { SignupUsecase } from '../application/usecase/auth/signup.usecase';
 @controller('/auth')
 export class AuthController extends BaseHttpController {
 
-  constructor( @inject(TYPES.SignupUsecase) private signupUsecase: SignupUsecase) {
+  constructor( @inject(TYPES.SignupUsecase) private signupUsecase: SignupUsecase ) {
     super();
   }
 

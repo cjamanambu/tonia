@@ -1,5 +1,5 @@
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne, JoinColumn } from 'typeorm';
-import { ILogin } from './login.interface';
+import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
+import { ILogin } from '../../domain/models/login/login.interface';
 
 @Entity()
 export class Login implements ILogin {

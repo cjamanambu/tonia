@@ -11,12 +11,12 @@ import './controllers/home.controller';
 import './controllers/users.controller';
 import './controllers/auth.controller';
 
-import { UserService } from './domain/entities/user/user.service';
+import { UserService } from './infrastructure/services/user.service';
 import { TYPES } from './application/constant/types';
-import { LoginService } from './domain/entities/login/login.service';
+import { LoginService } from './infrastructure/services/login.service';
 import { Mapper } from './application/mapper/mapper';
-import { CheckUserExistsMiddleware } from './infrastructure/middleware/check-user-exists.middleware';
-import { CheckDuplicateUsernameMiddleware } from './infrastructure/middleware/check-duplicate-username.middleware';
+import { CheckUserExistsMiddleware } from './application/middlewares/check-user-exists.middleware';
+import { CheckDuplicateUsernameMiddleware } from './application/middlewares/check-duplicate-username.middleware';
 import { SignupUsecase } from './application/usecase/auth/signup.usecase';
 
 

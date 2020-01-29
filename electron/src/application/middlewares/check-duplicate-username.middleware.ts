@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { BaseMiddleware } from 'inversify-express-utils';
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../../application/constant/types';
-import { LoginService } from '../../domain/entities/login/login.service';
+import { TYPES } from '../constant/types';
+import { LoginService } from '../../infrastructure/services/login.service';
 
 @injectable()
 export class CheckDuplicateUsernameMiddleware extends BaseMiddleware {

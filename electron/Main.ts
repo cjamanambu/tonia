@@ -27,7 +27,7 @@ export default class Main {
         server.listen();
         Main.mainWindow = new Main.BrowserWindow({
             width: 800, height: 600,
-            fullscreen: true,
+            // fullscreen: true,
             show: false,
             webPreferences: {
                 nodeIntegration: true

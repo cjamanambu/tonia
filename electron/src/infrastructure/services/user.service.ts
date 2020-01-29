@@ -1,13 +1,19 @@
-import { UserInput } from './user.input';
-import { IUser } from './user.interface';
-import { getRepository } from 'typeorm';
-import { User } from './user.entity';
+// App
 import { injectable } from 'inversify';
+import { getRepository } from 'typeorm';
+
+// entity
+import { User } from '../entities/user.entity';
+
+// domain
+import { IUser } from '../../domain/models/user/user.interface';
+import { IUserService } from '../../domain/models/user/user.service';
+import { UserInput } from '../../domain/models/user/user.input';
 
 @injectable()
-export class UserService {
+export class UserService implements IUserService {
 
-  constructor() {}
+  // private userRepository = getRepository(User);
 
   public async createAndSave(user: UserInput): Promise<IUser> {
     return await getRepository(User).save({
@@ -34,7 +40,7 @@ export class UserService {
     });
   }
 
-  public registerUser(id: string, loginID: string) {
-    return getRepository(User).update(id, { isRegistered: true, loginID });
+  public async registerUser(id: string, loginID: string) {
+    await getRepository(User).update(id, { isRegistered: true, loginID });
   }
 }

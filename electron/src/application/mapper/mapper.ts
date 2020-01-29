@@ -1,4 +1,4 @@
-import { LoginInput } from '../../domain/entities/login/login.input';
+import { LoginInput } from '../../domain/models/login/login.input';
 import { injectable } from 'inversify';
 import { SignupRequest } from '../../protocols/request/signup-request.protocol';
 
