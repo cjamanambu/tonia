@@ -1,15 +1,14 @@
 export const TYPES = {
 
   // usecases
-  UserUsecase: Symbol.for('UserUsecase'),
+  SignupUsecase: Symbol.for('SignupUsecase'),
 
   // services
   UserService: Symbol.for('UserService'),
   LoginService: Symbol.for('LoginSerice'),
 
-  // mappers
-  UserMapper: Symbol.for('UserMapper'),
-  AuthMapper: Symbol.for('AuthMapper'),
+  // mapper
+  Mapper: Symbol.for('Mapper'),
 
   // middlewares
   CheckDuplicateUsernameMiddleware: Symbol.for('CheckDuplicateUsernameMiddleware'),

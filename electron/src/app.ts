@@ -7,18 +7,17 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
-import './controller/v1/home.controller';
-import './controller/v1/users.controller';
-import './controller/v1/auth.controller';
+import './controllers/home.controller';
+import './controllers/users.controller';
+import './controllers/auth.controller';
 
 import { UserService } from './domain/entities/user/user.service';
 import { TYPES } from './application/constant/types';
-import { UserMapper } from './application/mapper/user.mapper';
-import { UserUsecase } from './application/usecase/user.usecase';
 import { LoginService } from './domain/entities/login/login.service';
-import { AuthMapper } from './application/mapper/auth.mapper';
+import { Mapper } from './application/mapper/mapper';
 import { CheckUserExistsMiddleware } from './infrastructure/middleware/check-user-exists.middleware';
 import { CheckDuplicateUsernameMiddleware } from './infrastructure/middleware/check-duplicate-username.middleware';
+import { SignupUsecase } from './application/usecase/auth/signup.usecase';
 
 
 export default class App {
@@ -38,20 +37,19 @@ export default class App {
   }
 
   private initializeBindings(): void {
-    // user
+    // services
     this.container.bind<UserService>(TYPES.UserService).to(UserService);
-    this.container.bind<UserMapper>(TYPES.UserMapper).to(UserMapper);
-    this.container.bind<UserUsecase>(TYPES.UserUsecase).to(UserUsecase);
-
-    // auth
-    this.container.bind<AuthMapper>(TYPES.AuthMapper).to(AuthMapper);
-
-    // login
     this.container.bind<LoginService>(TYPES.LoginService).to(LoginService);
 
-    // middleware
+    // mapper
+    this.container.bind<Mapper>(TYPES.Mapper).to(Mapper);
+
+    // middlewares
     this.container.bind<CheckUserExistsMiddleware>(TYPES.CheckUserExistsMiddleware).to(CheckUserExistsMiddleware);
     this.container.bind<CheckDuplicateUsernameMiddleware>(TYPES.CheckDuplicateUsernameMiddleware).to(CheckDuplicateUsernameMiddleware);
+
+    // usecases
+    this.container.bind<SignupUsecase>(TYPES.SignupUsecase).to(SignupUsecase);
   }
 
   private async initializeInfrastructure(): Promise<void> {
