@@ -2,6 +2,7 @@ export const TYPES = {
 
   // usecases
   SignupUsecase: Symbol.for('SignupUsecase'),
+  CreateuserUsecase: Symbol.for('CreateuserUsecase'),
 
   // services
   UserService: Symbol.for('UserService'),
@@ -13,5 +14,6 @@ export const TYPES = {
   // middlewares
   CheckDuplicateUsernameMiddleware: Symbol.for('CheckDuplicateUsernameMiddleware'),
   CheckUserExistsMiddleware: Symbol.for('CheckUserExistsMiddleware'),
+  CheckDuplicateNameMiddleware: Symbol.for('CheckDuplicateNameMiddleware'),
 
 };

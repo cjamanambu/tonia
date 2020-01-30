@@ -1,4 +1,3 @@
-
 export class UserInput {
   constructor(
     public firstname: string,

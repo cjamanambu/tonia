@@ -1,7 +1,10 @@
+// App
 import { BrowserWindow } from 'electron';
-import { server } from './src/server';
 import * as url from 'url';
 import * as path from 'path';
+
+// server
+import { server } from './src/server';
 
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
@@ -24,7 +27,6 @@ export default class Main {
     }
 
     private static async onReady() {
-        server.listen();
         Main.mainWindow = new Main.BrowserWindow({
             width: 800, height: 600,
             // fullscreen: true,
@@ -47,6 +49,7 @@ export default class Main {
     }
 
     public static main(app: Electron.App, browserWindow: typeof BrowserWindow) {
+        server.listen();
         Main.BrowserWindow = browserWindow;
         Main.application = app;
         Main.application.on('window-all-closed', Main.onWindowAllClosed);

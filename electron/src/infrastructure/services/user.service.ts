@@ -6,14 +6,12 @@ import { getRepository } from 'typeorm';
 import { User } from '../entities/user.entity';
 
 // domain
-import { IUser } from '../../domain/models/user/user.interface';
-import { IUserService } from '../../domain/models/user/user.service';
-import { UserInput } from '../../domain/models/user/user.input';
+import { IUser } from '../../domain/user/user.interface';
+import { IUserService } from '../../domain/user/user.service';
+import { UserInput } from '../../domain/user/user.input';
 
 @injectable()
 export class UserService implements IUserService {
-
-  // private userRepository = getRepository(User);
 
   public async createAndSave(user: UserInput): Promise<IUser> {
     return await getRepository(User).save({

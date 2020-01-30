@@ -1,24 +1,28 @@
+// App
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { Container } from 'inversify';
 import { createConnection, Connection, getConnectionOptions } from 'typeorm';
 import { AddressInfo } from 'net';
-
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
 
+// controllers
 import './controllers/home.controller';
 import './controllers/users.controller';
 import './controllers/auth.controller';
 
+// infrastructure
 import { UserService } from './infrastructure/services/user.service';
-import { TYPES } from './application/constant/types';
 import { LoginService } from './infrastructure/services/login.service';
-import { Mapper } from './application/mapper/mapper';
-import { CheckUserExistsMiddleware } from './application/middlewares/check-user-exists.middleware';
-import { CheckDuplicateUsernameMiddleware } from './application/middlewares/check-duplicate-username.middleware';
-import { SignupUsecase } from './application/usecase/auth/signup.usecase';
 
+// application
+import { CheckUserExistsMiddleware } from './application/middlewares/auth/check-user-exists.middleware';
+import { CheckDuplicateUsernameMiddleware } from './application/middlewares/auth/check-duplicate-username.middleware';
+import { SignupUsecase } from './application/usecase/auth/signup.usecase';
+import { TYPES } from './application/constant/types';
+import { Mapper } from './application/mapper/mapper';
+import { CreateuserUsecase } from './application/usecase/user/create-user.usecase';
 
 export default class App {
 
@@ -50,6 +54,7 @@ export default class App {
 
     // usecases
     this.container.bind<SignupUsecase>(TYPES.SignupUsecase).to(SignupUsecase);
+    this.container.bind<CreateuserUsecase>(TYPES.CreateuserUsecase).to(CreateuserUsecase);
   }
 
   private async initializeInfrastructure(): Promise<void> {
