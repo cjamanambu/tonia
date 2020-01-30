@@ -6,6 +6,7 @@ import { AddressInfo } from 'net';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
+import * as helmet from 'helmet';
 
 // controllers
 import './controllers/home.controller';
@@ -23,6 +24,7 @@ import { SignupUsecase } from './application/usecase/auth/signup.usecase';
 import { TYPES } from './application/constant/types';
 import { Mapper } from './application/mapper/mapper';
 import { CreateuserUsecase } from './application/usecase/user/create-user.usecase';
+import { LoginUsecase } from './application/usecase/auth/login.usecase';
 
 export default class App {
 
@@ -55,6 +57,7 @@ export default class App {
     // usecases
     this.container.bind<SignupUsecase>(TYPES.SignupUsecase).to(SignupUsecase);
     this.container.bind<CreateuserUsecase>(TYPES.CreateuserUsecase).to(CreateuserUsecase);
+    this.container.bind<LoginUsecase>(TYPES.LoginUsecase).to(LoginUsecase);
   }
 
   private async initializeInfrastructure(): Promise<void> {
@@ -69,6 +72,7 @@ export default class App {
       }));
       app.use(bodyParser.json());
       app.use(cors());
+      app.use(helmet());
     });
   }
 

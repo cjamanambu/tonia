@@ -3,7 +3,7 @@ export const TYPES = {
   // usecases
   SignupUsecase: Symbol.for('SignupUsecase'),
   CreateuserUsecase: Symbol.for('CreateuserUsecase'),
-
+  LoginUsecase: Symbol.for('LoginUsecase'),
   // services
   UserService: Symbol.for('UserService'),
   LoginService: Symbol.for('LoginSerice'),

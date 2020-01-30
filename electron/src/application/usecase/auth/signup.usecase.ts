@@ -5,7 +5,7 @@ import { TYPES } from '../../constant/types';
 import { Mapper } from '../../mapper/mapper';
 import { LoginService } from '../../../infrastructure/services/login.service';
 import { IUsecase } from '../usecase.interface';
-import { SignupRequest } from '../../../protocols/request/signup-request.protocol';
+import { ISignupRequest } from '../../../protocols/request/signup-request.protocol';
 import { UserService } from '../../../infrastructure/services/user.service';
 
 @injectable()
@@ -16,7 +16,7 @@ export class SignupUsecase implements IUsecase {
     @inject(TYPES.Mapper) private mapper: Mapper,
   ) {}
 
-  public async execute(signupRequest: SignupRequest) {
+  public async execute(signupRequest: ISignupRequest) {
     const loginInput = this.mapper.toLoginInput(signupRequest);
     loginInput.passwordSalt = bcrypt.genSaltSync(8);
     loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, loginInput.passwordSalt);
