@@ -1,9 +1,23 @@
+// @angular
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+// components
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
+// routers
+import { AppRoutingModule } from '../../core/app-routing.module';
 
+// @nebular
+import { NbAuthModule } from '@nebular/auth';
+import {
+  NbAlertModule,
+  NbButtonModule,
+  NbCheckboxModule,
+  NbInputModule
+} from '@nebular/theme';
 
 @NgModule({
   declarations: [
@@ -11,7 +25,14 @@ import { RegisterComponent } from './register/register.component';
     RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    AppRoutingModule,
+    NbAlertModule,
+    NbButtonModule,
+    NbCheckboxModule,
+    NbInputModule,
+    NbAuthModule
   ],
   exports: [
     LoginComponent,

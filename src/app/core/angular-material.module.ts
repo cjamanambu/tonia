@@ -16,6 +16,7 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatChipsModule,
+  MatCardModule,
   MatTooltipModule,
   MatTableModule,
   MatPaginatorModule
@@ -39,6 +40,7 @@ import {
     MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCardModule,
     MatChipsModule,
     MatTooltipModule,
     MatTableModule,
@@ -57,6 +59,7 @@ import {
     MatSelectModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatCardModule,
     MatChipsModule,
     MatTooltipModule,
     MatTableModule,

@@ -1,4 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'themes';
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@import '~@nebular/theme/styles/globals';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+body {
+	// background-image: url('./assets/the-lore-com-rRBtKW_aw_U-unsplash.jpg');
+  // background-color: rgb(21, 39, 51);
+	// background-color: rgb(79, 78, 104);
+  // -webkit-font-smoothing: antialiased;
+  // text-rendering: optimizeLegibility;
+}

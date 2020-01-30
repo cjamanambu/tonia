@@ -1,0 +1,12 @@
+{
+  "type": "sqlite",
+  "database": "electron/src/db/tonia.sqlite",
+  "synchronize": true,
+  "logging": true,
+  "entities": [
+    "electron/dist/src/infrastructure/entities/**/*.js"
+  ],
+  "cli": {
+    "entitiesDir": "electron/dist/src/infrastructure/entities"
+  } 
+}
