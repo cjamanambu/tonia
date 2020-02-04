@@ -20,7 +20,7 @@ import { HomeModule } from './modules/home/home.module';
 // @nebular
 import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 
 
 @NgModule({
@@ -45,6 +45,19 @@ import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
+          baseEndpoint: 'http://localhost:5000/api/v1',
+          login: {
+            alwaysFail: false,
+            endpoint: '/auth/login',
+            method: 'post',
+            redirect: {
+              success: '/dashboard',
+              failure: null
+            }
+          },
+          token: {
+            class: NbAuthJWTToken,
+          }
         }),
       ],
       forms: {},

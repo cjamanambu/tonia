@@ -17,11 +17,16 @@ const routes: Routes = [
     component: NbAuthComponent,
     children: [
       {
+        path: '',
+        component: LoginComponent
+      },
+      {
         path: 'login',
         component: LoginComponent
-      }
+      },
     ]
-  }
+  },
+  {path: 'dashboard', component: DashboardComponent}
 ];
 
 @NgModule({

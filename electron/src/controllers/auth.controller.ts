@@ -30,7 +30,7 @@ export class AuthController extends BaseHttpController {
       await this.loginUsecase.execute(req.body)
       .then(token => {
         if (token) {
-          res.send(token);
+          res.status(200).json({ token });
         } else {
           res.status(400).json({ error: 'Token could not be made for this login attempt'});
         }
