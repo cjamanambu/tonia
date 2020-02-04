@@ -7,12 +7,21 @@ import { LoginComponent } from '../modules/auth/login/login.component';
 import { RegisterComponent } from '../modules/auth/register/register.component';
 import { DashboardComponent } from '../modules/home/dashboard/dashboard.component';
 
+// nebular
+import { NbAuthComponent } from '@nebular/auth';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'login'},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'dashboard', component: DashboardComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'auth'},
+  {
+    path: 'auth',
+    component: NbAuthComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginComponent
+      }
+    ]
+  }
 ];
 
 @NgModule({

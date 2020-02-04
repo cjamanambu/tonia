@@ -9,22 +9,19 @@ import * as cors from 'cors';
 import * as helmet from 'helmet';
 
 // controllers
-import './controllers/home.controller';
-import './controllers/users.controller';
-import './controllers/auth.controller';
+// import './controllers/home.controller';
+// import './controllers/users.controller';
+// import './controllers/auth.controller';
+import './controllers';
 
-// infrastructure
-import { UserService } from './infrastructure/services/user.service';
-import { LoginService } from './infrastructure/services/login.service';
+// infrastructure services
+import { UserService, LoginService } from './infrastructure/services';
 
 // application
-import { CheckUserExistsMiddleware } from './application/middlewares/auth/check-user-exists.middleware';
-import { CheckDuplicateUsernameMiddleware } from './application/middlewares/auth/check-duplicate-username.middleware';
-import { SignupUsecase } from './application/usecase/auth/signup.usecase';
-import { TYPES } from './application/constant/types';
-import { Mapper } from './application/mapper/mapper';
-import { CreateuserUsecase } from './application/usecase/user/create-user.usecase';
-import { LoginUsecase } from './application/usecase/auth/login.usecase';
+import { CheckUserExistsMiddleware, CheckDuplicateEmailMiddleware } from './application/middlewares';
+import { SignupUsecase, CreateuserUsecase, LoginUsecase } from './application/usecase';
+import { TYPES } from './application/constants';
+import { Mapper } from './application/mapper';
 
 export default class App {
 
@@ -52,7 +49,7 @@ export default class App {
 
     // middlewares
     this.container.bind<CheckUserExistsMiddleware>(TYPES.CheckUserExistsMiddleware).to(CheckUserExistsMiddleware);
-    this.container.bind<CheckDuplicateUsernameMiddleware>(TYPES.CheckDuplicateUsernameMiddleware).to(CheckDuplicateUsernameMiddleware);
+    this.container.bind<CheckDuplicateEmailMiddleware>(TYPES.CheckDuplicateEmailMiddleware).to(CheckDuplicateEmailMiddleware);
 
     // usecases
     this.container.bind<SignupUsecase>(TYPES.SignupUsecase).to(SignupUsecase);

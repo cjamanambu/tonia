@@ -1,12 +1,11 @@
 import * as bcrypt from 'bcryptjs';
 
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../../constant/types';
-import { Mapper } from '../../mapper/mapper';
-import { LoginService } from '../../../infrastructure/services/login.service';
 import { IUsecase } from '../usecase.interface';
-import { ISignupRequest } from '../../../protocols/request/signup-request.protocol';
-import { UserService } from '../../../infrastructure/services/user.service';
+import { TYPES } from '../../constants';
+import { Mapper } from '../../mapper';
+import { LoginService, UserService } from '../../../infrastructure/services';
+import { ISignupRequest } from '../../../protocols';
 
 @injectable()
 export class SignupUsecase implements IUsecase {

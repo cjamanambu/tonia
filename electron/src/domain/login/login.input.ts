@@ -1,6 +1,6 @@
 export class LoginInput {
   constructor(
-    public username: string,
+    public email: string,
     public passwordHash: string,
     public passwordSalt: string,
     public role: string,

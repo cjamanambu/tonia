@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { injectable, inject } from 'inversify';
 import { BaseMiddleware } from 'inversify-express-utils';
-import { TYPES } from '../../constant/types';
-import { UserService } from '../../../infrastructure/services/user.service';
+import { TYPES } from '../../constants';
+import { UserService } from '../../../infrastructure/services';
 
 @injectable()
 export class CheckDublicateName extends BaseMiddleware {
@@ -15,8 +15,7 @@ export class CheckDublicateName extends BaseMiddleware {
     this.userService.findByName(req.body.firstname, req.body.lastname)
     .then(user => {
       if (user) {
-        res.status(400).send({ message: 'Failed! this user has been added!' });
-        return;
+        return res.status(400).send({ message: 'Failed! this user has been added!' });
       } else {
         return next();
       }

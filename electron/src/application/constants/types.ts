@@ -12,7 +12,7 @@ export const TYPES = {
   Mapper: Symbol.for('Mapper'),
 
   // middlewares
-  CheckDuplicateUsernameMiddleware: Symbol.for('CheckDuplicateUsernameMiddleware'),
+  CheckDuplicateEmailMiddleware: Symbol.for('CheckDuplicateEmailMiddleware'),
   CheckUserExistsMiddleware: Symbol.for('CheckUserExistsMiddleware'),
   CheckDuplicateNameMiddleware: Symbol.for('CheckDuplicateNameMiddleware'),
 

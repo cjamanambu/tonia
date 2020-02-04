@@ -1,9 +1,8 @@
 import * as express from 'express';
 import { controller, BaseHttpController, httpPost, request, response } from 'inversify-express-utils';
 import { inject } from 'inversify';
-import { TYPES } from '../application/constant/types';
-import { SignupUsecase } from '../application/usecase/auth/signup.usecase';
-import { LoginUsecase } from '../application/usecase/auth/login.usecase';
+import { TYPES } from '../application/constants';
+import { SignupUsecase, LoginUsecase } from '../application/usecase';
 
 @controller('/auth')
 export class AuthController extends BaseHttpController {
@@ -15,7 +14,7 @@ export class AuthController extends BaseHttpController {
     super();
   }
 
-  @httpPost('/signup', TYPES.CheckUserExistsMiddleware, TYPES.CheckDuplicateUsernameMiddleware)
+  @httpPost('/signup', TYPES.CheckUserExistsMiddleware, TYPES.CheckDuplicateEmailMiddleware)
   public async signup(@request() req: express.Request, @response() res: express.Response) {
     try {
       await this.signupUsecase.execute(req.body);

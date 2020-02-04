@@ -1,5 +1,5 @@
-import { Column, PrimaryGeneratedColumn, Entity } from 'typeorm';
-import { ILogin } from '../../domain/login/login.interface';
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { ILogin } from '../../domain/login';
 
 @Entity()
 export class Login implements ILogin {
@@ -8,7 +8,7 @@ export class Login implements ILogin {
   id: string;
 
   @Column()
-  username: string;
+  email: string;
 
   @Column()
   passwordHash: string;

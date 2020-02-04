@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
-import { IUser } from '../../domain/user/user.interface';
+import { IUser } from '../../domain/user';
 
 @Entity()
 export class User implements IUser {
@@ -17,16 +17,10 @@ export class User implements IUser {
   phone: string;
 
   @Column()
-  email: string;
-
-  @Column()
   address: string;
 
   @Column()
   type: string;
-
-  @Column()
-  isRegistered: boolean;
 
   @Column({nullable: true})
   loginID: string;

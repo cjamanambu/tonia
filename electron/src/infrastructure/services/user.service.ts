@@ -2,13 +2,9 @@
 import { injectable } from 'inversify';
 import { getRepository } from 'typeorm';
 
-// entity
-import { User } from '../entities/user.entity';
-
-// domain
-import { IUser } from '../../domain/user/user.interface';
-import { IUserService } from '../../domain/user/user.service';
-import { UserInput } from '../../domain/user/user.input';
+// User
+import { User } from '../entities';
+import { IUser, IUserService, UserInput } from '../../domain/user';
 
 @injectable()
 export class UserService implements IUserService {
@@ -17,11 +13,9 @@ export class UserService implements IUserService {
     return await getRepository(User).save({
       firstname: user.firstname,
       lastname: user.lastname,
-      email: user.email,
       phone: user.phone,
       address: user.address,
       type: user.type,
-      isRegistered: false,
       loginID: null
     });
   }
@@ -39,6 +33,6 @@ export class UserService implements IUserService {
   }
 
   public async registerUser(id: string, loginID: string) {
-    await getRepository(User).update(id, { isRegistered: true, loginID });
+    await getRepository(User).update(id, { loginID });
   }
 }

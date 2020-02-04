@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { controller, BaseHttpController, httpPost, request, response } from 'inversify-express-utils';
 import { inject } from 'inversify';
-import { TYPES } from '../application/constant/types';
-import { CreateuserUsecase } from '../application/usecase/user/create-user.usecase';
+import { TYPES } from '../application/constants';
+import { CreateuserUsecase } from '../application/usecase';
 
 @controller('/users')
 export class UserController extends BaseHttpController {
@@ -14,8 +14,14 @@ export class UserController extends BaseHttpController {
   @httpPost('/')
   public async create(@request() req: express.Request, @response() res: express.Response) {
     try {
-      await this.createuserUsecase.execute(req.body);
-      res.sendStatus(201);
+      await this.createuserUsecase.execute(req.body)
+      .then(newUser => {
+        if (newUser) {
+          res.status(201).json({ newUser });
+        } else {
+          res.status(400).json({ error: 'Error! The new user could not be created!' });
+        }
+      });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

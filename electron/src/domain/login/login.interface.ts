@@ -1,6 +1,6 @@
 export interface ILogin {
   id: string;
-  username: string;
+  email: string;
   passwordHash: string;
   passwordSalt: string;
   role: string;

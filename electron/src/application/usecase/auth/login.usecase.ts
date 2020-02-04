@@ -3,11 +3,10 @@ import * as jwt from 'jsonwebtoken';
 
 import { injectable, inject } from 'inversify';
 import { IUsecase } from '../usecase.interface';
-import { ILoginRequest } from '../../../protocols/request/login-request.protocol';
-import { ILoginResponse } from '../../../protocols/response/login-response.protocol';
-import { TYPES } from '../../constant/types';
-import { LoginService } from '../../../infrastructure/services/login.service';
-import { jwtConfig } from '../../config/jwt.config';
+import { ILoginRequest } from '../../../protocols';
+import { TYPES } from '../../constants';
+import { LoginService } from '../../../infrastructure/services';
+import { jwtConfig } from '../../config';
 
 @injectable()
 export class LoginUsecase implements IUsecase {
@@ -17,7 +16,7 @@ export class LoginUsecase implements IUsecase {
 
   public async execute(loginRequest: ILoginRequest): Promise<string> {
     let token = '';
-    await this.loginService.findByUsername(loginRequest.username)
+    await this.loginService.findByEmail(loginRequest.email)
     .then(login => {
       if (login) {
         if (!bcrypt.compareSync(loginRequest.password, login.passwordHash)) {
@@ -30,7 +29,7 @@ export class LoginUsecase implements IUsecase {
         };
         token = jwt.sign(payload, jwtConfig.secretKey, jwtConfig.signOptions);
       } else {
-        throw new Error('Error! Did not find user with that username');
+        throw new Error('Error! Did not find user with that email');
       }
     });
     return token;
