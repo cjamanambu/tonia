@@ -9,10 +9,10 @@ export class Mapper {
   constructor() {}
 
   public toLoginInput(from: ISignupRequest): LoginInput {
-    return new LoginInput(from.email, null, null, from.role, from.userID);
+    return new LoginInput(from.fullname, from.email, null, null);
   }
 
   public toUserInput(from: ICreateUserRequest): UserInput {
-    return new UserInput(from.firstname, from.lastname, from.phone, from.address, from.type);
+    return new UserInput(from.firstname, from.lastname, from.phone, from.role);
   }
 }

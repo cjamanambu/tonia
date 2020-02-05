@@ -20,16 +20,12 @@ export class LoginUsecase implements IUsecase {
     .then(login => {
       if (login) {
         if (!bcrypt.compareSync(loginRequest.password, login.passwordHash)) {
-          throw new Error('Error! The password is invalid');
+          throw new Error(`Error! The password is invalid`);
         }
-        const payload = {
-          loginID: login.id,
-          userID: login.userID,
-          role: login.role
-        };
+        const payload = { user: login.user };
         token = jwt.sign(payload, jwtConfig.secretKey, jwtConfig.signOptions);
       } else {
-        throw new Error('Error! Did not find user with that email');
+        throw new Error(`Error! Did not find login with that email`);
       }
     });
     return token;

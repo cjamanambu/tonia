@@ -9,12 +9,9 @@ import * as cors from 'cors';
 import * as helmet from 'helmet';
 
 // controllers
-// import './controllers/home.controller';
-// import './controllers/users.controller';
-// import './controllers/auth.controller';
 import './controllers';
 
-// infrastructure services
+// services
 import { UserService, LoginService } from './infrastructure/services';
 
 // application

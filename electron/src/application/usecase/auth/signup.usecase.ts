@@ -17,16 +17,10 @@ export class SignupUsecase implements IUsecase {
 
   public async execute(signupRequest: ISignupRequest) {
     const loginInput = this.mapper.toLoginInput(signupRequest);
-    loginInput.passwordSalt = bcrypt.genSaltSync(8);
-    loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, loginInput.passwordSalt);
-    await this.loginService.createAndSave(loginInput)
-    .then(async login => {
-      if (login) {
-        await this.userService.registerUser(login.userID, login.id);
-      } else {
-        throw new Error('Error! A new login could not be created for this user');
-      }
-    })
+    loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, 8);
+    await this.userService.findByFullname(loginInput.fullname)
+    .then(user => loginInput.user = user)
     .catch(error => console.log(error));
+    await this.loginService.createAndSave(loginInput);
   }
 }

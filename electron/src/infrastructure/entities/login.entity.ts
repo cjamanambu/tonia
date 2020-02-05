@@ -1,5 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, CreateDateColumn } from 'typeorm';
 import { ILogin } from '../../domain/login';
+import { User } from './user.entity';
+import { IsEmail } from 'class-validator';
 
 @Entity()
 export class Login implements ILogin {
@@ -8,18 +10,23 @@ export class Login implements ILogin {
   id: string;
 
   @Column()
+  @IsEmail()
   email: string;
 
   @Column()
   passwordHash: string;
 
   @Column()
-  passwordSalt: string;
+  @CreateDateColumn()
+  createdAt: Date;
 
-  @Column()
-  role: string;
-
-  @Column()
-  userID: string;
+  @OneToOne(type => User, user => user.login, {
+    eager: true,
+    nullable: false,
+    cascade: true,
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn()
+  user: User;
 
 }
