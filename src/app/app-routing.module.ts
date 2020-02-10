@@ -1,17 +1,22 @@
 // @angular
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ExtraOptions } from '@angular/router';
+
 
 // modules
-import { LoginComponent } from '../modules/auth/login/login.component';
-import { RegisterComponent } from '../modules/auth/register/register.component';
-import { DashboardComponent } from '../modules/home/dashboard/dashboard.component';
+import { LoginComponent } from './auth/login/login.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 // nebular
 import { NbAuthComponent } from '@nebular/auth';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'auth'},
+  {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module')
+    .then(m => m.PagesModule),
+  },
   {
     path: 'auth',
     component: NbAuthComponent,
@@ -25,12 +30,15 @@ const routes: Routes = [
         component: LoginComponent
       },
     ]
-  },
-  {path: 'dashboard', component: DashboardComponent}
+  }
 ];
 
+const config: ExtraOptions = {
+  useHash: false,
+};
+
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, config)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

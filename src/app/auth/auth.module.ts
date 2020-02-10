@@ -8,7 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 
 // routers
-import { AppRoutingModule } from '../../core/app-routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 
 // @nebular
 import { NbAuthModule } from '@nebular/auth';

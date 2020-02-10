@@ -29,8 +29,8 @@ export default class Main {
     private static async onReady() {
         Main.mainWindow = new Main.BrowserWindow({
             width: 1000, height: 800,
-            frame: false,
             fullscreen: true,
+            autoHideMenuBar: true,
             show: false,
             webPreferences: {
                 nodeIntegration: true
