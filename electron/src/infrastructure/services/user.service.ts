@@ -1,29 +1,44 @@
 // App
 import { injectable } from 'inversify';
 import { getRepository } from 'typeorm';
+import { validate } from 'class-validator';
 
-// entity
-import { User } from '../entities/user.entity';
+// User
+import { User } from '../entities';
+import { IUser, IUserService, UserInput } from '../../domain/user';
 
-// domain
-import { IUser } from '../../domain/user/user.interface';
-import { IUserService } from '../../domain/user/user.service';
-import { UserInput } from '../../domain/user/user.input';
 
 @injectable()
 export class UserService implements IUserService {
 
-  public async createAndSave(user: UserInput): Promise<IUser> {
-    return await getRepository(User).save({
-      firstname: user.firstname,
-      lastname: user.lastname,
-      email: user.email,
-      phone: user.phone,
-      address: user.address,
-      type: user.type,
-      isRegistered: false,
-      loginID: null
+  public async createAndSave(userInput: UserInput): Promise<IUser> {
+    const { firstname, lastname, phone, role } = userInput;
+    const user = new User();
+    user.firstname = firstname;
+    user.lastname = lastname;
+    user.username = null;
+    user.email = null;
+    user.phone = phone;
+    user.address = null;
+    user.role = role;
+    user.login = null;
+    const errors = await validate(user);
+    if (errors.length > 0) {
+      console.log(errors);
+      throw new Error(`Error! Validation failed for the new user!`);
+    }
+    return await getRepository(User).save(user);
+  }
+
+  public async findByEmail(email: string): Promise<IUser> {
+    return await getRepository(User).findOne({
+      where: { email }
     });
+  }
+
+  public async findByFullname(fullname: string): Promise<IUser> {
+    const names = fullname.split(' ');
+    return this.findByName(names[0], names[1]);
   }
 
   public async findByName(firstname: string, lastname: string): Promise<IUser> {
@@ -38,7 +53,7 @@ export class UserService implements IUserService {
     });
   }
 
-  public async registerUser(id: string, loginID: string) {
-    await getRepository(User).update(id, { isRegistered: true, loginID });
-  }
+  // public async registerUser(id: string, loginID: string) {
+  //   await getRepository(User).update(id, { loginID });
+  // }
 }

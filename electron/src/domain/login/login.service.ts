@@ -5,6 +5,6 @@ export interface ILoginService {
 
   createAndSave(login: LoginInput): Promise<ILogin>;
 
-  findByUsername(username: string): Promise<ILogin>;
+  findByEmail(email: string): Promise<ILogin>;
 
 }

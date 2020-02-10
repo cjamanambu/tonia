@@ -1,8 +1,6 @@
-export interface SignupRequest {
-  firstname: string;
-  lastname: string;
-  username: string;
+export interface ISignupRequest {
+  fullname: string;
+  email: string;
   password: string;
-  role: string;
-  userID: string;
+  confirmPassword: string;
 }

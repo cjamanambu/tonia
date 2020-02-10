@@ -1,8 +1,8 @@
 import * as express from 'express';
 import { BaseMiddleware } from 'inversify-express-utils';
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../../constant/types';
-import { UserService } from '../../../infrastructure/services/user.service';
+import { TYPES } from '../../constants';
+import { UserService } from '../../../infrastructure/services';
 
 @injectable()
 export class CheckUserExistsMiddleware extends BaseMiddleware {
@@ -12,13 +12,11 @@ export class CheckUserExistsMiddleware extends BaseMiddleware {
   }
 
   public handler(req: express.Request, res: express.Response, next: express.NextFunction): void {
-    this.userService.findByName(req.body.firstname, req.body.lastname)
+    this.userService.findByFullname(req.body.fullname)
     .then(user => {
       if (!user) {
-        res.status(400).send({ message: 'Failed! User was not found' });
-        return;
+        return res.status(400).send({ message: 'Failed! User was not found' });
       } else {
-        req.body.userID = user.id;
         return next();
       }
     });

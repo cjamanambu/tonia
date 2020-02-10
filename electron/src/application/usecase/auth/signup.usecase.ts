@@ -1,12 +1,11 @@
 import * as bcrypt from 'bcryptjs';
 
 import { injectable, inject } from 'inversify';
-import { TYPES } from '../../constant/types';
-import { Mapper } from '../../mapper/mapper';
-import { LoginService } from '../../../infrastructure/services/login.service';
 import { IUsecase } from '../usecase.interface';
-import { SignupRequest } from '../../../protocols/request/signup-request.protocol';
-import { UserService } from '../../../infrastructure/services/user.service';
+import { TYPES } from '../../constants';
+import { Mapper } from '../../mapper';
+import { LoginService, UserService } from '../../../infrastructure/services';
+import { ISignupRequest } from '../../../protocols';
 
 @injectable()
 export class SignupUsecase implements IUsecase {
@@ -16,18 +15,12 @@ export class SignupUsecase implements IUsecase {
     @inject(TYPES.Mapper) private mapper: Mapper,
   ) {}
 
-  public async execute(signupRequest: SignupRequest) {
+  public async execute(signupRequest: ISignupRequest) {
     const loginInput = this.mapper.toLoginInput(signupRequest);
-    loginInput.passwordSalt = bcrypt.genSaltSync(8);
-    loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, loginInput.passwordSalt);
-    await this.loginService.createAndSave(loginInput)
-    .then(async login => {
-      if (login) {
-        await this.userService.registerUser(login.userID, login.id);
-      } else {
-        throw new Error('Error! A new login could not be created for this user');
-      }
-    })
+    loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, 8);
+    await this.userService.findByFullname(loginInput.fullname)
+    .then(user => loginInput.user = user)
     .catch(error => console.log(error));
+    await this.loginService.createAndSave(loginInput);
   }
 }

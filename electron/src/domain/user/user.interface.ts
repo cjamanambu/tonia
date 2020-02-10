@@ -1,11 +1,14 @@
+import { ILogin } from '../login';
+
 export interface IUser {
   id: string;
   firstname: string;
   lastname: string;
-  phone: string;
+  username: string;
   email: string;
+  phone: string;
   address: string;
-  type: string;
-  isRegistered: boolean; // @TODO might not be necessary since we can just check if login ID is null
-  loginID: string;
+  role: string;
+  createdAt: Date;
+  login: ILogin;
 }

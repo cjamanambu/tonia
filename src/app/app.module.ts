@@ -8,19 +8,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // app
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 // core
-import { AppRoutingModule } from './core/app-routing.module';
-import { AngularMaterialModule } from './core/angular-material.module';
+import { LayoutService } from './core/utils/layout.service';
 
 // modules
-import { AuthModule } from './modules/auth/auth.module';
-import { HomeModule } from './modules/home/home.module';
+import { AuthModule } from './auth/auth.module';
+import { ThemeModule } from './theme/theme.module';
 
 // @nebular
-import { NbThemeModule, NbLayoutModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
-import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbPasswordAuthStrategy, NbAuthJWTToken } from '@nebular/auth';
 
 
 @NgModule({
@@ -31,26 +31,40 @@ import { NbAuthModule, NbPasswordAuthStrategy } from '@nebular/auth';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    AngularMaterialModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
     AuthModule,
     HttpClientModule,
-    HomeModule,
-    NbThemeModule.forRoot({ name: 'default' }),
     NbLayoutModule,
     NbEvaIconsModule,
+    ThemeModule,
+    NbSidebarModule.forRoot(),
+    NbMenuModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'default' }),
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
+          baseEndpoint: 'http://localhost:5000/api/v1',
+          login: {
+            alwaysFail: false,
+            endpoint: '/auth/login',
+            method: 'post',
+            redirect: {
+              success: '/pages/dashboard',
+              failure: null
+            }
+          },
+          token: {
+            class: NbAuthJWTToken,
+          }
         }),
       ],
       forms: {},
     }),
   ],
-  providers: [],
+  providers: [LayoutService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
