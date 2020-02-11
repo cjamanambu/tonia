@@ -1,13 +1,7 @@
 // @angular
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
-
-
-// modules
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-
-// nebular
+import { LoginComponent, RegisterComponent } from './auth';
 import { NbAuthComponent } from '@nebular/auth';
 
 const routes: Routes = [

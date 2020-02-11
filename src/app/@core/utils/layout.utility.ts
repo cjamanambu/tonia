@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { delay, share } from 'rxjs/operators';
 
 @Injectable()
-export class LayoutService {
+export class LayoutUtility {
   protected layoutSize$ = new Subject();
 
   changeLayoutSize() {

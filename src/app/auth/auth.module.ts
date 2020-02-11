@@ -2,16 +2,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NbAuthModule } from '@nebular/auth';
 
-// components
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-
-// routers
 import { AppRoutingModule } from '../app-routing.module';
-
-// @nebular
-import { NbAuthModule } from '@nebular/auth';
 import {
   NbAlertModule,
   NbButtonModule,
@@ -19,24 +14,23 @@ import {
   NbInputModule
 } from '@nebular/theme';
 
+const COMPONENTS = [
+  LoginComponent,
+  RegisterComponent
+];
+
+const MODULES = [
+  FormsModule,
+  NbAuthModule,
+  AppRoutingModule,
+  NbAlertModule,
+  NbButtonModule,
+  NbCheckboxModule,
+  NbInputModule
+];
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    AppRoutingModule,
-    NbAlertModule,
-    NbButtonModule,
-    NbCheckboxModule,
-    NbInputModule,
-    NbAuthModule
-  ],
-  exports: [
-    LoginComponent,
-    RegisterComponent
-  ]
+  declarations: [...COMPONENTS ],
+  imports: [ CommonModule, ...MODULES ],
+  exports: [...COMPONENTS ]
 })
 export class AuthModule { }

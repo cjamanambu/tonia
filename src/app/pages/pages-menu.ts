@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true
   },
   {
-    title: 'ACTIVITIES',
+    title: 'PATIENT MANAGEMENT',
     group: true
   }
 ];
