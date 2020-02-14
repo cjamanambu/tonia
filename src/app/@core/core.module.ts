@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { NbAuthModule, NbAuthJWTToken, NbPasswordAuthStrategy } from '@nebular/auth';
 import { environment } from '../../environments/environment';
 
-import { AuthService, NavigationService, SidebarService } from './services';
-import { LayoutUtility } from './utils';
+import { AuthService, SidebarService, MenuService } from './services';
+import { LayoutUtility, NavigationUtility } from './utils';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -32,9 +32,10 @@ export const CORE_PROVIDERS = [
     forms: {},
   }).providers,
   LayoutUtility,
+  NavigationUtility,
   AuthService,
-  NavigationService,
-  SidebarService
+  SidebarService,
+  MenuService
 ];
 
 @NgModule({

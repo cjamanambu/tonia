@@ -3,7 +3,7 @@
     <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
       <nb-icon icon="menu-2-outline"></nb-icon>
     </a>
-    <a class="logo" href="#" (click)="navigateHome()">TONIA-<span>admin</span></a>
+    <a class="logo" href="#" (click)="navigateHome()">tonia-<span>admin</span></a>
   </div>
 </div>
 
@@ -19,7 +19,7 @@
                nbContextMenuTag="user-context-menu"
                nbContextMenuTrigger="hover"
                shape="round"
-               [name]="user?.firstname" 
+               [name]="user?.name" 
                [title]="user?.role">
       </nb-user>
     </nb-action>

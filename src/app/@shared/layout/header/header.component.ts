@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NbMenuService, NbSidebarService, NbThemeService } from '@nebular/theme';
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
 import { Subject } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 
-import { AuthService, NavigationService, SidebarService } from '../../../@core/services';
-import { LayoutUtility } from '../../../@core/utils';
+import {
+  AuthService,
+  SidebarService,
+  MenuService
+} from '../../../@core/services';
 
 @Component({
   selector: 'app-header',
@@ -14,35 +14,35 @@ import { LayoutUtility } from '../../../@core/utils';
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
+  tokenPayload: any = {};
   user: any = {};
   userMenu = [ { title: 'Profile' }, { title: 'Logout' } ];
 
   constructor(
-    private sidebarService: SidebarService,
-    private menuService: NbMenuService,
+    private menuService: MenuService,
     private authService: AuthService,
-    private navigationService: NavigationService
+    private sidebarService: SidebarService
   ) {}
 
   ngOnInit() {
     this.onUserMenuClick();
-    this.user = (this.authService.getTokenPayload()).user;
+    this.getCurrentUser();
   }
 
   onUserMenuClick() {
-    this.menuService.onItemClick().pipe(
-      filter(({ tag }) => tag === 'user-context-menu'),
-      map(({ item: { title } }) => title),
-    ).subscribe(title => {
-      if (title === 'Logout') {
-        this.logout();
-      }
+    this.menuService.onMenuItemClick('user-context-menu').subscribe(title => {
+      title === 'Logout' ? this.logout() : console.log(title);
     });
+  }
+
+  getCurrentUser() {
+    this.tokenPayload = this.authService.getTokenPayload();
+    this.user = this.tokenPayload.user;
+    this.user.name = this.user.firstname + ' ' + this.user.lastname;
   }
 
   logout(): void {
     this.authService.logout('email');
-    this.navigationService.navigateToLogin();
   }
 
   toggleSidebar(): boolean {
