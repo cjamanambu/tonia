@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   NbActionsModule,
@@ -11,12 +11,12 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
+  NbThemeModule,
+  NbToggleModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
-import { HeaderComponent } from './components';
-
-import { DefaultLayoutComponent } from './layouts';
+import { HeaderComponent, FooterComponent, LayoutComponent } from './layout';
 
 const NB_MODULES = [
   NbLayoutModule,
@@ -30,11 +30,14 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
+  NbThemeModule,
+  NbToggleModule
 ];
 
 const COMPONENTS = [
   HeaderComponent,
-  DefaultLayoutComponent
+  FooterComponent,
+  LayoutComponent
 ];
 
 @NgModule({
@@ -42,4 +45,17 @@ const COMPONENTS = [
   exports: [CommonModule, ...COMPONENTS],
   declarations: [...COMPONENTS]
 })
-export class ThemeModule { }
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [
+        ...NbThemeModule.forRoot(
+          {
+            name: 'default',
+          }
+        ).providers,
+      ]
+    };
+  }
+}

@@ -4,14 +4,14 @@ import * as jwt from 'jsonwebtoken';
 import { injectable, inject } from 'inversify';
 import { IUsecase } from '../usecase.interface';
 import { ILoginRequest } from '../../../protocols';
+import { ILoginService } from '../../../domain/login';
 import { TYPES } from '../../constants';
-import { LoginService } from '../../../infrastructure/services';
-import { jwtConfig } from '../../config';
+import { JWT_CONFIG } from '../../config';
 
 @injectable()
 export class LoginUsecase implements IUsecase {
   constructor(
-    @inject(TYPES.LoginService) private loginService: LoginService
+    @inject(TYPES.LoginService) private loginService: ILoginService
   ) {}
 
   public async execute(loginRequest: ILoginRequest): Promise<string> {
@@ -22,8 +22,8 @@ export class LoginUsecase implements IUsecase {
         if (!bcrypt.compareSync(loginRequest.password, login.passwordHash)) {
           throw new Error(`Error! The password is invalid`);
         }
-        const payload = { user: login.user };
-        token = jwt.sign(payload, jwtConfig.secretKey, jwtConfig.signOptions);
+        const PAYLOAD = { user: login.user };
+        token = jwt.sign(PAYLOAD, JWT_CONFIG.secretKey, JWT_CONFIG.signOptions);
       } else {
         throw new Error(`Error! Did not find login with that email`);
       }
