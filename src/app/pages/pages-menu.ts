@@ -11,5 +11,9 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'PATIENT MANAGEMENT',
     group: true
+  },
+  {
+    title: 'STAFF MANAGEMENT',
+    group: true
   }
 ];

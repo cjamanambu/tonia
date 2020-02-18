@@ -1,7 +1,7 @@
 // App
 import { BrowserWindow } from 'electron';
+import { BROWSER_WINDOW_OPTIONS, RENDERER_FILE } from './main.config';
 import * as url from 'url';
-import * as path from 'path';
 
 // server
 import { server } from './src/server';
@@ -9,7 +9,7 @@ import { server } from './src/server';
 export default class Main {
     static mainWindow: Electron.BrowserWindow;
     static application: Electron.App;
-    static BrowserWindow;
+    static BrowserWindow: any;
 
     private static onWindowAllClosed() {
         if (process.platform !== 'darwin') {
@@ -27,24 +27,8 @@ export default class Main {
     }
 
     private static async onReady() {
-        Main.mainWindow = new Main.BrowserWindow({
-            width: 1000, height: 800,
-            fullscreen: true,
-            autoHideMenuBar: true,
-            show: false,
-            webPreferences: {
-                nodeIntegration: true
-            }
-        });
-
-        Main.mainWindow.loadURL(
-            url.format({
-                pathname: path.join(__dirname, `/../../dist/index.html`),
-                protocol: 'file:',
-                slashes: true
-            })
-        );
-
+        Main.mainWindow = new Main.BrowserWindow(BROWSER_WINDOW_OPTIONS);
+        Main.mainWindow.loadURL(url.format(RENDERER_FILE));
         Main.mainWindow.once('ready-to-show', Main.onReadyToShow);
         Main.mainWindow.on('closed', Main.onClosed);
     }

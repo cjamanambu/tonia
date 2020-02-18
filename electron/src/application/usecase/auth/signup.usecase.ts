@@ -3,16 +3,17 @@ import * as bcrypt from 'bcryptjs';
 import { injectable, inject } from 'inversify';
 import { IUsecase } from '../usecase.interface';
 import { TYPES } from '../../constants';
-import { Mapper } from '../../mapper';
-import { LoginService, UserService } from '../../../infrastructure/services';
+import { IMapper } from '../../mapper';
+import { ILoginService } from '../../../domain/login';
+import { IUserService } from '../../../domain/user';
 import { ISignupRequest } from '../../../protocols';
 
 @injectable()
 export class SignupUsecase implements IUsecase {
   constructor(
-    @inject(TYPES.LoginService) private loginService: LoginService,
-    @inject(TYPES.UserService) private userService: UserService,
-    @inject(TYPES.Mapper) private mapper: Mapper,
+    @inject(TYPES.LoginService) private loginService: ILoginService,
+    @inject(TYPES.UserService) private userService: IUserService,
+    @inject(TYPES.Mapper) private mapper: IMapper,
   ) {}
 
   public async execute(signupRequest: ISignupRequest) {

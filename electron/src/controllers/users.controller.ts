@@ -2,12 +2,12 @@ import * as express from 'express';
 import { controller, BaseHttpController, httpPost, request, response } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import { TYPES } from '../application/constants';
-import { CreateuserUsecase } from '../application/usecase';
+import { IUsecase } from '../application/usecase';
 
 @controller('/users')
 export class UserController extends BaseHttpController {
 
-  constructor(@inject(TYPES.CreateuserUsecase) private createuserUsecase: CreateuserUsecase) {
+  constructor(@inject(TYPES.CreateuserUsecase) private createuserUsecase: IUsecase) {
     super();
   }
 

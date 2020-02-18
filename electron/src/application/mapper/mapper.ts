@@ -3,8 +3,13 @@ import { ISignupRequest, ICreateUserRequest } from '../../protocols';
 import { UserInput } from '../../domain/user';
 import { LoginInput } from '../../domain/login';
 
+export interface IMapper {
+  toLoginInput(from: ISignupRequest): LoginInput;
+  toUserInput(from: ICreateUserRequest): UserInput;
+}
+
 @injectable()
-export class Mapper {
+export class Mapper implements IMapper {
 
   constructor() {}
 

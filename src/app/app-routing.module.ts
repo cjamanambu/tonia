@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 import { LoginComponent, RegisterComponent } from './auth';
 import { NbAuthComponent } from '@nebular/auth';
+import { AuthGuard } from './@core/guards';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'auth'},
   {
     path: 'pages',
+    canActivate: [AuthGuard],
     loadChildren: () => import('./pages/pages.module')
     .then(m => m.PagesModule),
   },

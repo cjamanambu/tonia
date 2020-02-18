@@ -1,23 +1,33 @@
 import { Injectable } from '@angular/core';
-import { NbAuthService, NbAuthJWTToken } from '@nebular/auth';
+import { NbAuthService, NbAuthJWTToken, NbTokenStorage } from '@nebular/auth';
 import { NavigationUtility } from '../utils';
+import { tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private authService: NbAuthService, private navigationUtility: NavigationUtility) {}
+  constructor(private authService: NbAuthService, private navigationUtility: NavigationUtility, private tokenStorage: NbTokenStorage) {}
 
-  getTokenPayload(): any {
+  getTokenPayload(): string {
     let payload: string;
     this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {
       payload = token.getPayload();
-      console.log(token);
     });
     return payload;
   }
 
-  logout(strategy: string): void {
-    this.authService.logout(strategy);
+  logout(): void {
+    this.tokenStorage.clear();
     this.navigationUtility.navigateToLogin();
+  }
+
+  isAuthenticatedUser(): Observable<boolean> {
+    return this.authService.isAuthenticated()
+    .pipe(tap(authenticated => {
+      if (!authenticated) {
+        this.navigationUtility.navigateToLogin();
+      }
+    }));
   }
 }

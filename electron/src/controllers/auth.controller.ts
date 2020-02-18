@@ -2,14 +2,14 @@ import * as express from 'express';
 import { controller, BaseHttpController, httpPost, request, response } from 'inversify-express-utils';
 import { inject } from 'inversify';
 import { TYPES } from '../application/constants';
-import { SignupUsecase, LoginUsecase } from '../application/usecase';
+import { IUsecase } from '../application/usecase';
 
 @controller('/auth')
 export class AuthController extends BaseHttpController {
 
   constructor(
-    @inject(TYPES.SignupUsecase) private signupUsecase: SignupUsecase,
-    @inject(TYPES.LoginUsecase) private loginUsecase: LoginUsecase
+    @inject(TYPES.SignupUsecase) private signupUsecase: IUsecase,
+    @inject(TYPES.LoginUsecase) private loginUsecase: IUsecase
   ) {
     super();
   }

@@ -1,10 +1,11 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbAuthJWTToken, NbPasswordAuthStrategy } from '@nebular/auth';
+import { NbAuthModule, NbAuthJWTToken, NbPasswordAuthStrategy, NbTokenLocalStorage, NbTokenStorage } from '@nebular/auth';
 import { environment } from '../../environments/environment';
 
 import { AuthService, SidebarService, MenuService } from './services';
 import { LayoutUtility, NavigationUtility } from './utils';
+import { AuthGuard } from './guards';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
 
@@ -31,16 +32,20 @@ export const CORE_PROVIDERS = [
     ],
     forms: {},
   }).providers,
+  {
+    provide: NbTokenStorage, useClass: NbTokenLocalStorage
+  },
   LayoutUtility,
   NavigationUtility,
   AuthService,
   SidebarService,
-  MenuService
+  MenuService,
+  AuthGuard
 ];
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
   ],
   exports: [],
   declarations: [],

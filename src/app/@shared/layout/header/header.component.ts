@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    this.authService.logout('email');
+    this.authService.logout();
   }
 
   toggleSidebar(): boolean {

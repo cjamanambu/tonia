@@ -11,7 +11,8 @@ import {
   NbButtonModule,
   NbSelectModule,
   NbIconModule,
-  NbThemeModule
+  NbThemeModule,
+  NbToggleModule
 } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 
@@ -29,7 +30,8 @@ const NB_MODULES = [
   NbSelectModule,
   NbIconModule,
   NbEvaIconsModule,
-  NbThemeModule
+  NbThemeModule,
+  NbToggleModule
 ];
 
 const COMPONENTS = [
