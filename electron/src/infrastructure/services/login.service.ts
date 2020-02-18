@@ -5,12 +5,12 @@ import { validate } from 'class-validator';
 
 // Login
 import { Login } from '../entities';
-import { ILogin, ILoginService, LoginInput } from '../../domain/login';
+import { ILogin, ILoginService, ILoginInput } from '../../domain/login';
 
 @injectable()
 export class LoginService implements ILoginService {
 
-  public async createAndSave(loginInput: LoginInput): Promise<ILogin> {
+  public async createAndSave(loginInput: ILoginInput): Promise<ILogin> {
     const { email, passwordHash, user } = loginInput;
     const login = new Login();
     login.email = email;

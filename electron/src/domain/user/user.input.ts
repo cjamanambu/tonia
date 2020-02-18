@@ -1,9 +1,6 @@
-export class UserInput {
-  constructor(
-    public firstname: string,
-    public lastname: string,
-    public phone: string,
-    public role: string
-  ) {}
-
+export interface IUserInput {
+  firstname: string;
+  lastname: string;
+  phone: string;
+  role: string;
 }

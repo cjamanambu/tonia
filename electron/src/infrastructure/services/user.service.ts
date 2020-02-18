@@ -5,13 +5,13 @@ import { validate } from 'class-validator';
 
 // User
 import { User } from '../entities';
-import { IUser, IUserService, UserInput } from '../../domain/user';
+import { IUser, IUserService, IUserInput } from '../../domain/user';
 
 
 @injectable()
 export class UserService implements IUserService {
 
-  public async createAndSave(userInput: UserInput): Promise<IUser> {
+  public async createAndSave(userInput: IUserInput): Promise<IUser> {
     const { firstname, lastname, phone, role } = userInput;
     const user = new User();
     user.firstname = firstname;

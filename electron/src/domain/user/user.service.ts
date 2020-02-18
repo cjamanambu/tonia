@@ -1,8 +1,8 @@
-import { UserInput } from './user.input';
+import { IUserInput } from './user.input';
 import { IUser } from './user.interface';
 
 export interface IUserService {
-  createAndSave(user: UserInput): Promise<IUser>;
+  createAndSave(user: IUserInput): Promise<IUser>;
 
   findByEmail(email: string): Promise<IUser>;
 
