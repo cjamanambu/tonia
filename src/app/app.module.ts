@@ -12,6 +12,7 @@ import { AuthModule } from './auth/auth.module';
 import { NbThemeModule, NbLayoutModule, NbSidebarModule, NbMenuModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbAuthModule } from '@nebular/auth';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NbAuthModule } from '@nebular/auth';
     NbMenuModule.forRoot(),
     NbThemeModule.forRoot(),
     NbAuthModule.forRoot(),
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    NgbModule.forRoot()
   ],
   bootstrap: [ AppComponent ],
 })

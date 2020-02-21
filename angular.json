@@ -28,7 +28,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/@shared/styles/styles.scss"
+              "src/app/@shared/styles/styles.scss",
+              {
+                "input": "./node_modules/bootstrap/dist/css/bootstrap.css"
+              }
             ],
             "scripts": []
           },

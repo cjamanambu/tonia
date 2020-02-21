@@ -19,15 +19,14 @@ export class LoginService implements ILoginService {
     const errors = await validate(login);
     if (errors.length > 0) {
       console.log(errors);
-      throw new Error(`Error! Validation failed for the new user!`);
+      throw new Error(`Error! Validation failed for the new login!`);
     }
     return await getRepository(Login).save(login);
   }
 
   public async findByEmail(email: string): Promise<ILogin> {
-    return await getRepository(Login).findOne({
+    return await getRepository(Login).findOneOrFail({
       where: { email }
     });
   }
-
 }

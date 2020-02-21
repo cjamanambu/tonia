@@ -14,12 +14,12 @@ export class CheckUserExistsMiddleware extends BaseMiddleware {
   public handler(req: express.Request, res: express.Response, next: express.NextFunction): void {
     this.userService.findByFullname(req.body.fullname)
     .then(user => {
-      if (!user) {
-        return res.status(400).send({ message: 'Failed! User was not found' });
-      } else {
+      if (user) {
         return next();
       }
+    })
+    .catch(error => {
+      return res.status(400).send({ message: 'Failed! Error finding user with this fullname', error });
     });
   }
-
 }

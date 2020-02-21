@@ -14,11 +14,10 @@ export class CheckDuplicateEmailMiddleware extends BaseMiddleware {
   public handler(req: express.Request, res: express.Response, next: express.NextFunction): void {
     this.loginService.findByEmail(req.body.email)
     .then(login => {
-      if (login) {
-        return res.status(400).send({ message: 'Failed! Email is already in use!' });
-      } else {
-        return next();
-      }
+      return res.status(400).send({ message: 'Failed! Found login with the same email!', login });
+    })
+    .catch(error => {
+      return next();
     });
   }
 

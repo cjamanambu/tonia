@@ -31,7 +31,7 @@ export class UserService implements IUserService {
   }
 
   public async findByEmail(email: string): Promise<IUser> {
-    return await getRepository(User).findOne({
+    return await getRepository(User).findOneOrFail({
       where: { email }
     });
   }
@@ -42,13 +42,13 @@ export class UserService implements IUserService {
   }
 
   public async findByName(firstname: string, lastname: string): Promise<IUser> {
-    return await getRepository(User).findOne({
+    return await getRepository(User).findOneOrFail({
       where: { firstname, lastname }
     });
   }
 
   public async findByID(id: string): Promise<IUser> {
-    return getRepository(User).findOne({
+    return getRepository(User).findOneOrFail({
       where: { id }
     });
   }

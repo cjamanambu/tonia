@@ -3,21 +3,28 @@ import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-const routes: Routes = [{
-  path: '',
-  component: PagesComponent,
-  children: [
-    {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full',
-    },
-    {
-      path: 'dashboard',
-      component: DashboardComponent
-    }
-  ]
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: PagesComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full',
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
+        path: 'staff',
+        loadChildren: () => import('./staff/staff.module')
+        .then(m => m.StaffModule),
+      }
+    ]
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
