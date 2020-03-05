@@ -12,7 +12,7 @@ import { IUser, IUserService, IUserInput } from '../../domain/user';
 export class UserService implements IUserService {
 
   public async createAndSave(userInput: IUserInput): Promise<IUser> {
-    const { firstname, lastname, phone, role } = userInput;
+    const { firstname, lastname, phone, role, age, sex } = userInput;
     const user = new User();
     user.firstname = firstname;
     user.lastname = lastname;
@@ -21,6 +21,8 @@ export class UserService implements IUserService {
     user.phone = phone;
     user.address = null;
     user.role = role;
+    user.age = age;
+    user.sex = sex;
     user.login = null;
     const errors = await validate(user);
     if (errors.length > 0) {

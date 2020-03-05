@@ -3,4 +3,6 @@ export interface IUserInput {
   lastname: string;
   phone: string;
   role: string;
+  age: string;
+  sex: string;
 }

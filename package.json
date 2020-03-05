@@ -13,7 +13,8 @@
     "electron": "rm -rf electron/dist && tsc --p electron && electron .",
     "app": "npm run build && npm run electron",
     "watch": "npm run build && tsc --p electron && nodemon --exec 'electron .'",
-    "web": "concurrently \"npm:dev\" \"npm:electron\""
+    "web": "concurrently \"npm:dev\" \"npm:electron\"",
+    "console": "concurrently \"npm:electron\""
   },
   "private": true,
   "dependencies": {

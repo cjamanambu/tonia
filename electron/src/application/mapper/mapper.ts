@@ -27,7 +27,9 @@ export class Mapper implements IMapper {
       firstname: from.firstname,
       lastname: from.lastname,
       phone: from.phone,
-      role: from.role
+      role: from.role,
+      sex: from.sex,
+      age: from.age,
     };
   }
 }
