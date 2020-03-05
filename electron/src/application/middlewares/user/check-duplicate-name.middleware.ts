@@ -2,12 +2,12 @@ import * as express from 'express';
 import { injectable, inject } from 'inversify';
 import { BaseMiddleware } from 'inversify-express-utils';
 import { TYPES } from '../../constants';
-import { UserService } from '../../../infrastructure/services';
+import { IUserService } from '../../../domain/user';
 
 @injectable()
 export class CheckDublicateName extends BaseMiddleware {
 
-  constructor(@inject(TYPES.UserService) private userService: UserService) {
+  constructor(@inject(TYPES.UserService) private userService: IUserService) {
     super();
   }
 

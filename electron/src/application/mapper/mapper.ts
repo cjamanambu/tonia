@@ -1,11 +1,11 @@
 import { injectable } from 'inversify';
 import { ISignupRequest, ICreateUserRequest } from '../../protocols';
-import { UserInput } from '../../domain/user';
-import { LoginInput } from '../../domain/login';
+import { IUserInput } from '../../domain/user';
+import { ILoginInput } from '../../domain/login';
 
 export interface IMapper {
-  toLoginInput(from: ISignupRequest): LoginInput;
-  toUserInput(from: ICreateUserRequest): UserInput;
+  toLoginInput(from: ISignupRequest): ILoginInput;
+  toUserInput(from: ICreateUserRequest): IUserInput;
 }
 
 @injectable()
@@ -13,11 +13,23 @@ export class Mapper implements IMapper {
 
   constructor() {}
 
-  public toLoginInput(from: ISignupRequest): LoginInput {
-    return new LoginInput(from.fullname, from.email, null, null);
+  public toLoginInput(from: ISignupRequest): ILoginInput {
+    return {
+      fullname: from.fullname,
+      email: from.email,
+      passwordHash: null,
+      user: null
+    };
   }
 
-  public toUserInput(from: ICreateUserRequest): UserInput {
-    return new UserInput(from.firstname, from.lastname, from.phone, from.role);
+  public toUserInput(from: ICreateUserRequest): IUserInput {
+    return {
+      firstname: from.firstname,
+      lastname: from.lastname,
+      phone: from.phone,
+      role: from.role,
+      sex: from.sex,
+      age: from.age,
+    };
   }
 }

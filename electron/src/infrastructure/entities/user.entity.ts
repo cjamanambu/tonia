@@ -1,9 +1,10 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne, TableInheritance } from 'typeorm';
 import { IsInt, Length, IsEmail, IsOptional, IsAlphanumeric } from 'class-validator';
 import { IUser } from '../../domain/user';
 import { Login } from './login.entity';
 
 @Entity()
+@TableInheritance({ column: { type: 'varchar', name: 'type' } } )
 export class User implements IUser {
 
   @PrimaryGeneratedColumn('uuid')
@@ -34,6 +35,12 @@ export class User implements IUser {
 
   @Column()
   role: string;
+
+  @Column()
+  age: string;
+
+  @Column()
+  sex: string;
 
   @Column()
   @CreateDateColumn()

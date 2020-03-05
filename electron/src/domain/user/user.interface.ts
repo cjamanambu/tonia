@@ -9,6 +9,8 @@ export interface IUser {
   phone: string;
   address: string;
   role: string;
+  age: string;
+  sex: string;
   createdAt: Date;
   login: ILogin;
 }

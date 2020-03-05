@@ -9,11 +9,17 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true
   },
   {
-    title: 'PATIENT MANAGEMENT',
+    title: 'MANAGE STORE',
     group: true
   },
   {
-    title: 'STAFF MANAGEMENT',
-    group: true
+    title: 'Staff Management',
+    icon: 'people-outline',
+    children: [
+      {
+        title: 'Add Staff',
+        link: '/pages/staff/add-staff'
+      }
+    ]
   }
 ];

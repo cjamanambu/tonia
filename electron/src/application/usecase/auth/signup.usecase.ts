@@ -4,7 +4,7 @@ import { injectable, inject } from 'inversify';
 import { IUsecase } from '../usecase.interface';
 import { TYPES } from '../../constants';
 import { IMapper } from '../../mapper';
-import { ILoginService } from '../../../domain/login';
+import { ILogin, ILoginService } from '../../../domain/login';
 import { IUserService } from '../../../domain/user';
 import { ISignupRequest } from '../../../protocols';
 
@@ -16,12 +16,16 @@ export class SignupUsecase implements IUsecase {
     @inject(TYPES.Mapper) private mapper: IMapper,
   ) {}
 
-  public async execute(signupRequest: ISignupRequest) {
+  public async execute(signupRequest: ISignupRequest): Promise<ILogin> {
     const loginInput = this.mapper.toLoginInput(signupRequest);
     loginInput.passwordHash = bcrypt.hashSync(signupRequest.password, 8);
     await this.userService.findByFullname(loginInput.fullname)
-    .then(user => loginInput.user = user)
-    .catch(error => console.log(error));
-    await this.loginService.createAndSave(loginInput);
+    .then(user => {
+      loginInput.user = user;
+    })
+    .catch(error => {
+      throw new Error(error.message);
+    });
+    return await this.loginService.createAndSave(loginInput);
   }
 }

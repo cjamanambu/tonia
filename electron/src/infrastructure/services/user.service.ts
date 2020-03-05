@@ -5,14 +5,14 @@ import { validate } from 'class-validator';
 
 // User
 import { User } from '../entities';
-import { IUser, IUserService, UserInput } from '../../domain/user';
+import { IUser, IUserService, IUserInput } from '../../domain/user';
 
 
 @injectable()
 export class UserService implements IUserService {
 
-  public async createAndSave(userInput: UserInput): Promise<IUser> {
-    const { firstname, lastname, phone, role } = userInput;
+  public async createAndSave(userInput: IUserInput): Promise<IUser> {
+    const { firstname, lastname, phone, role, age, sex } = userInput;
     const user = new User();
     user.firstname = firstname;
     user.lastname = lastname;
@@ -21,6 +21,8 @@ export class UserService implements IUserService {
     user.phone = phone;
     user.address = null;
     user.role = role;
+    user.age = age;
+    user.sex = sex;
     user.login = null;
     const errors = await validate(user);
     if (errors.length > 0) {
@@ -31,7 +33,7 @@ export class UserService implements IUserService {
   }
 
   public async findByEmail(email: string): Promise<IUser> {
-    return await getRepository(User).findOne({
+    return await getRepository(User).findOneOrFail({
       where: { email }
     });
   }
@@ -42,13 +44,13 @@ export class UserService implements IUserService {
   }
 
   public async findByName(firstname: string, lastname: string): Promise<IUser> {
-    return await getRepository(User).findOne({
+    return await getRepository(User).findOneOrFail({
       where: { firstname, lastname }
     });
   }
 
   public async findByID(id: string): Promise<IUser> {
-    return getRepository(User).findOne({
+    return getRepository(User).findOneOrFail({
       where: { id }
     });
   }

@@ -13,17 +13,17 @@ export class UserController extends BaseHttpController {
 
   @httpPost('/')
   public async create(@request() req: express.Request, @response() res: express.Response) {
-    try {
-      await this.createuserUsecase.execute(req.body)
-      .then(newUser => {
-        if (newUser) {
-          res.status(201).json({ newUser });
-        } else {
-          res.status(400).json({ error: 'Error! The new user could not be created!' });
-        }
-      });
-    } catch (error) {
-      res.status(400).json({ error: error.message });
-    }
+    let content: any;
+    let statusCode: number;
+    await this.createuserUsecase.execute(req.body)
+    .then(user => {
+      content = { user };
+      statusCode = 201;
+    })
+    .catch(error => {
+      content = { error: error.message };
+      statusCode = 400;
+    });
+    return this.json(content, statusCode);
   }
 }

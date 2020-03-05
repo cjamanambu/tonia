@@ -1,9 +1,9 @@
 import { ILogin } from './login.interface';
-import { LoginInput } from './login.input';
+import { ILoginInput } from './login.input';
 
 export interface ILoginService {
 
-  createAndSave(login: LoginInput): Promise<ILogin>;
+  createAndSave(login: ILoginInput): Promise<ILogin>;
 
   findByEmail(email: string): Promise<ILogin>;
 
