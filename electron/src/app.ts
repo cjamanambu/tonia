@@ -12,7 +12,7 @@ import * as helmet from 'helmet';
 import './controllers';
 
 // services
-import { UserService, LoginService } from './infrastructure/services';
+import { UserService } from './infrastructure/services';
 
 // application
 import { CheckUserExistsMiddleware, CheckDuplicateEmailMiddleware } from './application/middlewares';
@@ -39,7 +39,6 @@ export default class App {
   private initializeBindings(): void {
     // services
     this.container.bind<UserService>(TYPES.UserService).to(UserService);
-    this.container.bind<LoginService>(TYPES.LoginService).to(LoginService);
 
     // mapper
     this.container.bind<Mapper>(TYPES.Mapper).to(Mapper);

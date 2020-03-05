@@ -4,24 +4,24 @@ import * as jwt from 'jsonwebtoken';
 import { injectable, inject } from 'inversify';
 import { IUsecase } from '../usecase.interface';
 import { ILoginRequest } from '../../../protocols';
-import { ILoginService } from '../../../domain/login';
+import { IUserService } from '../../../domain/user';
 import { TYPES } from '../../constants';
 import { JWT_CONFIG } from '../../config';
 
 @injectable()
 export class LoginUsecase implements IUsecase {
   constructor(
-    @inject(TYPES.LoginService) private loginService: ILoginService
+    @inject(TYPES.UserService) private userService: IUserService
   ) {}
 
   public async execute(loginRequest: ILoginRequest): Promise<string> {
     let token = '';
-    await this.loginService.findByEmail(loginRequest.email)
-    .then(login => {
-      if (!bcrypt.compareSync(loginRequest.password, login.passwordHash)) {
+    await this.userService.findByEmail(loginRequest.email)
+    .then(user => {
+      if (!bcrypt.compareSync(loginRequest.password, user.passwordHash)) {
         throw new Error(`Error! The password is invalid`);
       }
-      const PAYLOAD = { user: login.user };
+      const PAYLOAD = { user };
       token = jwt.sign(PAYLOAD, JWT_CONFIG.secretKey, JWT_CONFIG.signOptions);
     })
     .catch(error => {

@@ -4,9 +4,9 @@ export const TYPES = {
   SignupUsecase: Symbol.for('SignupUsecase'),
   CreateuserUsecase: Symbol.for('CreateuserUsecase'),
   LoginUsecase: Symbol.for('LoginUsecase'),
+
   // services
   UserService: Symbol.for('UserService'),
-  LoginService: Symbol.for('LoginSerice'),
 
   // mapper
   Mapper: Symbol.for('Mapper'),

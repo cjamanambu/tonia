@@ -1,7 +1,6 @@
 // App
 import { injectable } from 'inversify';
 import { getRepository } from 'typeorm';
-import { validate } from 'class-validator';
 
 // User
 import { User } from '../entities';
@@ -12,23 +11,18 @@ import { IUser, IUserService, IUserInput } from '../../domain/user';
 export class UserService implements IUserService {
 
   public async createAndSave(userInput: IUserInput): Promise<IUser> {
-    const { firstname, lastname, phone, role, age, sex } = userInput;
+    const { firstname, lastname, phone, email, role, age, sex } = userInput;
     const user = new User();
     user.firstname = firstname;
     user.lastname = lastname;
     user.username = null;
-    user.email = null;
+    user.email = email;
+    user.passwordHash = null;
     user.phone = phone;
     user.address = null;
     user.role = role;
     user.age = age;
     user.sex = sex;
-    user.login = null;
-    const errors = await validate(user);
-    if (errors.length > 0) {
-      console.log(errors);
-      throw new Error(`Error! Validation failed for the new user!`);
-    }
     return await getRepository(User).save(user);
   }
 
@@ -55,7 +49,7 @@ export class UserService implements IUserService {
     });
   }
 
-  // public async registerUser(id: string, loginID: string) {
-  //   await getRepository(User).update(id, { loginID });
-  // }
+  public async registerUser(id: string, passwordHash: string) {
+    await getRepository(User).update(id, { passwordHash });
+  }
 }

@@ -9,7 +9,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     home: true
   },
   {
-    title: 'MANAGE STORE',
+    title: 'MANAGE PHARMACY',
     group: true
   },
   {
@@ -19,6 +19,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
       {
         title: 'Add Staff',
         link: '/pages/staff/add-staff'
+      }
+    ]
+  },
+  {
+    title: 'Patient Management',
+    icon: 'activity-outline',
+    children: [
+      {
+        title: 'Add Patient',
       }
     ]
   }

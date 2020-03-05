@@ -13,13 +13,13 @@ export class AuthController extends BaseHttpController {
     super();
   }
 
-  @httpPost('/signup', TYPES.CheckUserExistsMiddleware, TYPES.CheckDuplicateEmailMiddleware)
+  @httpPost('/signup', TYPES.CheckUserExistsMiddleware)
   public async signup(@request() req: express.Request) {
     let content: any;
     let statusCode: number;
     await this.signupUsecase.execute(req.body)
-    .then(login => {
-      content = { login };
+    .then(user => {
+      content = { user };
       statusCode = 201;
     })
     .catch(error => {

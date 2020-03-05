@@ -12,5 +12,5 @@ export interface IUserService {
 
   findByID(id: string): Promise<IUser>;
 
-  // registerUser(id: string, loginID: string): void;
+  registerUser(id: string, passwordHash: string): void;
 }
